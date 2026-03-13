@@ -9,11 +9,13 @@ type Post = {
   body: string;
 };
 
-export default async function AboutPage(){  //! async
+export default async function AboutPage({searchParams} : {searchParams: any}){  //! async
     const response = await fetch('https://jsonplaceholder.typicode.com/posts', 
         { next: {revalidate: 3600} }  //si autoInvalida la cache dopo 1h, invece {cache:'no-store'} non utilizzerebbe proprio la cache quindi ogni fetch è direttamente una chiamata al backend/db
     );
     const repos: Post[] = await response.json();
+
+    if(searchParams.error) throw new Error('cathched error!!'); //!!
 
     return (
       <>
@@ -30,9 +32,12 @@ export default async function AboutPage(){  //! async
     );
 
 }
-//utilizza anche SUSPANSE, se vuoi singoli fallback nella page, e.g.
+//!!utilizza anche ERRORBOUNDARY(from plugin)+SUSPANSE, per pro TOP TOP!!
 /*
+import ErrorBoundary from "react-error-boundary";
+    <ErrorBoundary fallback={<div>error catched during fetching data!!</div>}>
         <Suspense fallback={<BlogListSkeleton />}>
            <BlogList />  //renderizzazione ok
         </Suspense>
+    </ErrorBoundary>
 */

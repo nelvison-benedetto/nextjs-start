@@ -1,7 +1,9 @@
 'use client' // Error boundaries must be Client Components
  
-import { useEffect } from 'react'
- 
+import { use, useEffect } from 'react'
+import { useRouter } from 'next/navigation'  //added. è /NAVIGATION!!
+import { startTransition } from 'react' //added
+
 export default function ErrorPage({
   error,
   reset,
@@ -13,6 +15,8 @@ export default function ErrorPage({
     // Log the error to an error reporting service
     console.error(error)
   }, [error])
+
+  const router = useRouter();
  
   return (
     <div>
@@ -20,7 +24,13 @@ export default function ErrorPage({
       <button
         onClick={
           // Attempt to recover by trying to re-render the segment
-          () => reset()
+          //() => reset()  default dato da DOCS nextjs
+          ()=> {
+            startTransition(() => {
+              router.refresh()
+              reset()
+            })// refresh dati + retry render. top. 
+          }
         }
       >
         Try again
