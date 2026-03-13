@@ -8,7 +8,7 @@ type Post = {
 };
 
 export default async function AboutPage(){  //! async
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', 
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', 
         { next: {revalidate: 3600} }  //si autoInvalida la cache dopo 1h, invece {cache:'no-store'} non utilizzerebbe proprio la cache quindi ogni fetch è direttamente una chiamata al backend/db
     );
     const repos: Post[] = await response.json();
@@ -28,7 +28,7 @@ export default async function AboutPage(){  //! async
     );
 
 }
-//utilizza anche SUSPANNSE, se vuoi singoli fallback nella page, e.g.
+//utilizza anche SUSPANSE, se vuoi singoli fallback nella page, e.g.
 /*
         <Suspense fallback={<BlogListSkeleton />}>
            <BlogList />  //renderizzazione ok
