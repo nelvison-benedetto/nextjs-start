@@ -28,3 +28,9 @@ export default async function AboutPage(){  //! async
     );
 
 }
+//utilizza anche SUSPANNSE, se vuoi singoli fallback nella page, e.g.
+/*
+        <Suspense fallback={<BlogListSkeleton />}>
+           <BlogList />  //renderizzazione ok
+        </Suspense>
+*/
