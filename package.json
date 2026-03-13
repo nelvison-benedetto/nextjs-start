@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "json-server": "json-server --delay=5000 --watch db.json --port 3004"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -17,6 +18,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "json-server": "^0.17.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
