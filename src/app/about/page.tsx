@@ -1,3 +1,5 @@
+import styles from "../../components/about.module.css";
+
 export const dynamic = 'force-dynamic';  //x caching
 
 type Post = {
@@ -15,7 +17,7 @@ export default async function AboutPage(){  //! async
 
     return (
       <>
-        <h1>About Page!!</h1>
+        <h1 className="mylink">About Page!!</h1>
 
         <ul className="space-y-8">
           {repos.map((repo) => (
